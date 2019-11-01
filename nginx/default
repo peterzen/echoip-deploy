@@ -18,11 +18,11 @@
 
 # Default server configuration
 #
+
 server {
-	listen 80 default_server;
-	listen [::]:80 default_server;
-	include proxy.conf;
-	server_name _;
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    return 301 https://$host$request_uri;
 }
 
 
@@ -32,8 +32,8 @@ server {
 	listen [2a01:4f8:c2c:29b3::1]:443  ssl default_server;
 
 	server_name things.net.froggle.org;
-	ssl_certificate           /etc/nginx/ifconfig.froggle.org.pem;
-	ssl_certificate_key       /etc/nginx/ifconfig.froggle.org.key;
+	ssl_certificate           /root/.acme.sh/ifconfig.froggle.org/ifconfig.froggle.org.cer;
+	ssl_certificate_key       /root/.acme.sh/ifconfig.froggle.org/ifconfig.froggle.org.key;
 
 	ssl on;
 	ssl_session_cache  builtin:1000  shared:SSL:10m;
