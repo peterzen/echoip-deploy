@@ -2,6 +2,10 @@
 
 Helper files to run the [echoip](https://github.com/mpolden/echoip) service on an own server, which is connected to multiple networks (public and private).
 
+### Installation
+* Install `echoip` binary to `/usr/local/bin`
+* `cp index.html /var/www/html`
+
 ### `systemd` service
 ```bash
 cp echoip.service /etc/systemd/system/
