@@ -1,0 +1,19 @@
+[Unit]
+Description=Bazarr Daemon
+After=syslog.target network.target
+
+[Service]
+WorkingDirectory=/home/echoip
+User=echoip
+Group=echoip
+UMask=0002
+Restart=on-failure
+RestartSec=5
+Type=simple
+ExecStart=/usr/local/bin/echoip -r -p -t /usr/local/bin/index.html -H X-Real-IP
+KillSignal=SIGINT
+TimeoutStopSec=20
+SyslogIdentifier=echoip
+
+[Install]
+WantedBy=multi-user.target
