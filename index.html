@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>What is my IP address? &mdash; {{ .Host }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="What is my IP address?">
+    <style>
+      html, .pure-g [class *= "pure-u"] {
+        background-color: white;
+        font-family: "Open Sans", sans-serif;
+      }
+      pre {
+        font-family: "Monaco", "Menlo", "Consolas", "Courier New", monospace;
+      }
+      body {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 80%;
+        margin-bottom: 20px;
+      }
+      .ip {
+        border: 1px solid #cbcbcb;
+        background: #f2f2f2;
+        font-size: 36px;
+        padding: 6px;
+      }
+      .footer {
+          border-top: 1px solid #eee;
+          background: rgb(250, 250, 250) !important;
+      }
+
+
+    </style>
+  </head>
+  <body>
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <h1><code class="ip">{{ .IP }}</code></h1>
+      </div>
+    </div>
+{{ if .Country }}
+        <h2>Country lookup: {{ .Country }} ({{ .CountryISO }})</h2>
+{{ end }}
+{{ if .City }}
+        <h2>City lookup: {{ .City }}</h2>
+        <pre>
+{{ end }}
+{{ if .ASN }}
+        <h2>ASN lookup: {{ .ASN }}</h2>
+{{ if .ASNOrg }}
+	<h2>ASN Org: {{ .ASNOrg }}</h2>
+{{ end }}
+{{ end }}
+      </div>
+      <div class="pure-u-1 pure-u-md-1-2">
+        <pre>
+{{ .JSON }}</pre>
+{{ if .Port }}
+        <h2>Port testing</h2>
+        <pre>
+$ http {{ .Host }}/port/8080
+{
+  "ip": "{{ .IP }}",
+  "port": 8080,
+  "reachable": false
+}</pre>
+{{ end }}
+      </div>
+{{ if .City }}
+      <div class="pure-u-1 pure-u-md-1-1">
+          <h2>Map</h2>
+          <iframe width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox={{ .BoxLonLeft }}%2C{{ .BoxLatBottom }}%2C{{ .BoxLonRight }}%2C{{ .BoxLatTop }}&amp;layer=mapnik&amp;marker={{ .Latitude }}%2C{{ .Longitude }}"></iframe>
+      </div>
+{{ end }}
+  </body>
+</html>
