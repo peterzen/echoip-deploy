@@ -4,7 +4,8 @@ Helper files to run the [echoip](https://github.com/mpolden/echoip) service on a
 
 ### Installation
 * Install `echoip` binary to `/usr/local/bin`
-* `cp index.html /var/www/html`
+* Create `echoip user`: `adduser echoip`
+* `cp index.html /home/echoip`
 
 ### GeoIP database
 
