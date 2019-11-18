@@ -6,6 +6,17 @@ Helper files to run the [echoip](https://github.com/mpolden/echoip) service on a
 * Install `echoip` binary to `/usr/local/bin`
 * `cp index.html /var/www/html`
 
+### GeoIP database
+
+* Install [GeoIP update](https://github.com/maxmind/geoipupdate/releases)
+* `cp GeoIP.conf /etc`
+* `su - echoip`
+* Run `geoipupdate -d /home/echoip`
+* Install `crontab` entry: 
+```
+15 1 * * 5 /usr/local/bin/geoipupdate -d /home/echoip
+```
+
 ### `systemd` service
 ```bash
 cp echoip.service /etc/systemd/system/
